@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="box">
+	<h1>TEXT TO SPEECH</h1>
+
+<!--           Text Area -->
+<!--          Load the CKEditor-->
+            {{ ckeditor.load() }}
+<!--          Configure it with the name of the form field from TextForm-->
+            {{ ckeditor.config(name='text') }}
+<!--          Create the wtf quickform from TextForm-->
+            {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+
+
+
+</div>
+
+{% endblock %}
