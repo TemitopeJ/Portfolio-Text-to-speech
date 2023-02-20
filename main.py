@@ -24,12 +24,17 @@ class TextForm(FlaskForm):
     submit = SubmitField("Read Text")
 
 
+aws_access_key_id = os.environ.get('AWS_ACCESS_KEY_ID')
+aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
+
+
 @app.route("/", methods=["GET", "POST"])
 def home():
     form = TextForm()
 
     if form.validate_on_submit():
-        aws_mag_con = boto3.session.Session(profile_name="Tjosh16")
+        aws_mag_con = boto3.session.Session(aws_access_key_id=aws_access_key_id,
+                                            aws_secret_access_key=aws_secret_access_key,)
         client = aws_mag_con.client(service_name="polly", region_name="us-east-1")
         print(form.text.data)
         ckeditor_input = form.text.data
